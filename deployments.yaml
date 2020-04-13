@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webapp
+spec:
+  #Minimum number of seconds for which a newly created pod should be ready
+  #without any of its container crashing, for it to be considered available.
+  #Defaults to 0 (pod will be considered available as soon as it is ready)
+  minReadySeconds: 30
+  selector:
+    matchLabels:
+      app: webapp
+  replicas:  2
+  template:  #template for the pods
+    metadata:
+      labels:
+        app: webapp
+    spec:
+      containers:
+      - name: webapp
+        image: richardchesterwood/k8s-fleetman-webapp-angular:release0-5
